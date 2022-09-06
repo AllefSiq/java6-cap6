@@ -47,71 +47,41 @@ public class Teste {
         lista.add(cc3);
         lista.add(cc4);
 
-        //NumeroDaContaComparator comparator = new NumeroDaContaComparator();
+        //Function Object.
+        //NumeroDaContaComparator2 comparator = new NumeroDaContaComparator2();
+        lista.sort((Conta c1, Conta c2)-> Integer.compare(c1.getNumero(),c2.getNumero()));
+
+
+
+
+
+
+
+
+    Comparator<Conta> compNumero = (conta1, conta2)-> Integer.compare(conta1.getNumero(),conta2.getNumero());
+
+
+    Comparator<Conta> compTitular = (Conta c1, Conta c2)-> {
+            String nomec1 = c1.getTitular().getNome();
+            String nomec2 = c2.getTitular().getNome();
+            return nomec1.compareTo(nomec2);
         
+        
+    };
 
 
-        System.out.println("Lista Desordenada");
-        for (Conta conta : lista) {
-            System.out.println(conta + ", " + conta.getTitular().getNome());
-        }
 
-        //lista.sort(new TitularDaContaComparator());
-        lista.sort(null);
+        lista.sort(compTitular);
 
         System.out.println("Lista Ordenada");
-        for (Conta conta : lista) {
-            System.out.println(conta + ", " + conta.getSaldo());
-        }
+
+        lista.forEach( (conta)-> System.out.println(conta + ", " + conta.getSaldo()) );
+
+        
 
 
 
     }
 
-    public class NumeroDaContaComparator2 implements Comparator<Conta> {
-
-        /* (non-Javadoc)
-         * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
-         */
-        @Override
-        public int compare(Conta c1, Conta c2) {
-            
-            
-            
-            return Integer.compare(c1.getNumero(), c2.getNumero());
-            
-            //return c1.getNumero() - c2.getNumero();
     
-            /*
-             
-            if (c1.getNumero() < c2.getNumero()) {
-                return -1;
-            }
-            
-            if (c1.getNumero() > c2.getNumero()) {
-                return 1;
-            }
-            
-            return 0;
-            */
-        }
-        
-        
-    }
-
-    public class TitularDaContaComparator2 implements Comparator<Conta> {
-
-        @Override
-        public int compare(Conta c1, Conta c2) {
-    
-            String nomeC1 = c1.getTitular().getNome();
-            String nomeC2 = c2.getTitular().getNome();
-    
-             return nomeC1.compareTo(nomeC2);
-    
-    
-            
-        }
-        
-    }
 }
